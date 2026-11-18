@@ -132,6 +132,12 @@ def main() -> None:
     noise_shape = (1, cfg.chunk_size, cfg.max_action_dim)
 
     for task_id, vec in sorted(envs.items()):
+        if not vec._envs:
+            # lerobot builds only the first task's simulator eagerly; the rest are lazy and expose
+            # no LiberoEnv until reset. Rebuild this task alone so it is the eager one.
+            vec.close()
+            one = make_env_config("libero", task=args.suite, task_ids=[int(task_id)])
+            vec = make_env(one, n_envs=1, use_async_envs=False)[args.suite][task_id]
         libero_env = vec._envs[0]
         for ep in range(args.episodes):
             if (task_id, ep) in done:
@@ -171,6 +177,7 @@ def main() -> None:
             metrics = score_episode(arr, dt, success)
             row = dict(suite=args.suite, task_id=int(task_id), episode=ep, tag=tag, task=task[0],
                        n_bystanders=len(rec.bystanders), targets_known=rec.targets_known,
+                       min_clear_pair=rec.min_clear_pair, n_static_overlap=len(rec._static_overlap),
                        wall_s=time.time() - t0, replan_latency_s=float(np.max(infer_s)), **metrics)
             if not args.no_npz:
                 np.savez_compressed(out_dir / f"t{task_id:02d}_e{ep:03d}.npz", success=success, dt=dt, **arr)
@@ -178,7 +185,8 @@ def main() -> None:
                 f.write(json.dumps(row) + "\n")
             print(f"[{tag}] task {task_id} ep {ep}: success={success} steps={metrics['steps']} "
                   f"rho={metrics['rho']:.3f} peakF={metrics['peak_force']:.1f}N "
-                  f"clear={metrics['min_clear_mm']:.1f}mm bystander={metrics['bystander_mm']:.2f}mm "
+                  f"clear={metrics['min_clear_mm']:.1f}mm [{rec.min_clear_pair}] "
+                  f"bystander={metrics['bystander_mm']:.2f}mm "
                   f"({row['wall_s']:.1f}s)", flush=True)
         vec.close()
 
