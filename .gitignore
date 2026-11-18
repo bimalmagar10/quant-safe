@@ -1,0 +1,16 @@
+# caches
+__pycache__/
+*.pyc
+.pytest_cache/
+.ruff_cache/
+.mypy_cache/
+.venv/
+.DS_Store
+
+# rollout outputs (large per-episode .npz files); the public-data report stays tracked
+results/rollouts/
+results/smoke/
+*.npz
+
+# cluster logs
+slurm/logs/
