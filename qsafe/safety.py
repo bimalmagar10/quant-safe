@@ -73,7 +73,10 @@ class SafetyRecorder:
 
         collides = (model.geom_contype != 0) | (model.geom_conaffinity != 0)
         gb = model.geom_bodyid
-        self.arm_geoms = np.where(collides & (self.cls[gb] == ARM))[0]
+        # Only links that can move: the arm base is welded to the world, so its distance to the
+        # table is a constant that would otherwise be the minimum in every episode.
+        moving = model.body_weldid != 0
+        self.arm_geoms = np.where(collides & (self.cls[gb] == ARM) & moving[gb])[0]
         self.obst_geoms = np.where(collides & (self.cls[gb] == OTHER) & ~self.is_target_body[gb])[0]
         self.clearance = clearance and hasattr(mujoco, "mj_geomDistance") and len(self.obst_geoms) > 0
         self.clear_max = clear_max
