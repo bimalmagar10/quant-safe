@@ -1,0 +1,11 @@
+# E1: dose-response inside the success-flat region of pi0.5 on LIBERO-Spatial.
+# 10 tasks x 25 episodes = 250 pairs per config. VLAQuantBench reports success of
+# 98.5 / 97.5 / 99.0 / 99.0 / 97.5 % for W8 / W4 / W3 / W4A8 / W4A6 (baseline 99.0), and 0 % at W4A4.
+--policy-type pi05 --suite libero_spatial --episodes 25
+fp          fp
+fp_noiseB   fp       --noise-offset 1
+w8          all:W8
+w4          all:W4
+w3          all:W3
+w4a8        all:W4A8
+w4a6        all:W4A6

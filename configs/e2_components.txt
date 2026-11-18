@@ -1,0 +1,9 @@
+# E2: which component's precision governs margin damage? One component quantized at a time.
+# Reuses the fp and fp_noiseB folders from E1 (same suite, same pairing).
+--policy-type pi05 --suite libero_spatial --episodes 25
+vision_w3     vision:W3
+llm_w3        llm:W3
+expert_w3     expert:W3
+vision_w4a6   vision:W4A6
+llm_w4a6      llm:W4A6
+expert_w4a6   expert:W4A6,io:W4A6

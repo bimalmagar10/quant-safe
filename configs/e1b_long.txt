@@ -1,0 +1,7 @@
+# E1b: same doses on LIBERO-10 (long horizon, more contact events per episode).
+--policy-type pi05 --suite libero_10 --episodes 25
+fp          fp
+fp_noiseB   fp       --noise-offset 1
+w4          all:W4
+w3          all:W3
+w4a6        all:W4A6

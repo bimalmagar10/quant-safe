@@ -1,0 +1,4 @@
+# 2 tasks x 2 episodes x 2 configs: checks the whole pipeline in a few minutes.
+--policy-type pi05 --suite libero_spatial --task-ids 0,1 --episodes 2 --out results/smoke
+fp        fp
+w4        all:W4
