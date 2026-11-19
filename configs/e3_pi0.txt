@@ -1,0 +1,8 @@
+# E3a: does the action shrinkage seen in pi0.5 appear in pi0 (same backbone family, different action conditioning)?
+# VLAQuantBench's pi0 showed almost no steps shift, so a null here is plausible.
+--policy-type pi0 --suite libero_spatial --episodes 25
+fp          fp
+fp_noiseB   fp       --noise-offset 1
+w4          all:W4
+w3          all:W3
+w4a6        all:W4A6

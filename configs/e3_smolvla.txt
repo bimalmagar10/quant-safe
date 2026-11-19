@@ -1,0 +1,8 @@
+# E3b: same question on SmolVLA (different backbone: SmolVLM2-500M with an interleaved action expert).
+# Uses the repo-wide default of 10 executed actions per chunk (the checkpoint's own default is 1).
+--policy-type smolvla --suite libero_spatial --episodes 25
+fp          fp
+fp_noiseB   fp       --noise-offset 1
+w4          all:W4
+w3          all:W3
+w4a6        all:W4A6
