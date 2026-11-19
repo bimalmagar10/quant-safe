@@ -1,0 +1,8 @@
+# E4: SmolVLA at milder precision. E3b showed success collapsing at W4 (62 % -> 31 %) with forces rising,
+# so the question is whether there is a band where success is still flat and margins already worse.
+# Reuses the fp and fp_noiseB folders from E3b (same suite, same pairing).
+--policy-type smolvla --suite libero_spatial --episodes 25
+w8          all:W8
+w6          all:W6
+w5          all:W5
+w8a8        all:W8A8
