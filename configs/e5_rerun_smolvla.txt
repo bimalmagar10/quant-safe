@@ -1,0 +1,3 @@
+# E5b: exact rerun of full precision with identical seeds (SmolVLA). See e5_rerun_pi0.txt.
+--policy-type smolvla --suite libero_spatial --episodes 25
+fp_rerun    fp

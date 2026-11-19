@@ -1,0 +1,4 @@
+# E5a: exact rerun of full precision with identical seeds. Any outcome flip here is system nondeterminism,
+# which puts a floor under every paired comparison and every noise-seed claim.
+--policy-type pi0 --suite libero_spatial --episodes 25
+fp_rerun    fp
